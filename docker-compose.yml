@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mattermost:
+    image: mattermost
+    container_name: mattermost
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - mattermost
+    volumes:
+      - ./config:/opt/mattermost/config
+      - ./data:/opt/mattermost/data
+      - ./logs:/opt/mattermost/logs
+      - ./plugins:/opt/mattermost/plugins
+      - ./client/plugins:/opt/mattermost/client/plugins
+    ports:
+      - 8065:8065
+
+networks:
+  mattermost:
+    external: true
